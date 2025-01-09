@@ -1,0 +1,8 @@
+pandas
+numpy
+seaborn
+Flask
+scikit-learn
+fuzzywuzzy
+python-Levenshtein
+-e .

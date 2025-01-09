@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Movie Recommendation System</h1>
+    <p class="lead">Find your next favorite movie!</p>
+</div>
+<div class="container">
+    <form action="{{ url_for('recommend') }}" method="POST">
+        <div class="form-group">
+            <label for="movie_title">Enter Movie Title:</label>
+            <input type="text" id="movie_title" name="movie_title" class="form-control" placeholder="Start typing..." required autocomplete="off">
+            <div id="suggestions" class="suggestions-box"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Recommendations</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('movie_title');
+        const suggestions = document.getElementById('suggestions');
+    
+        input.addEventListener('input', function () {
+            const query = input.value.trim();
+    
+            if (query.length < 3) {
+                suggestions.innerHTML = '';
+                return;
+            }
+    
+            fetch(`/autocomplete?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestions.innerHTML = '';
+                    data.forEach(movie => {
+                        const div = document.createElement('div');
+                        div.textContent = movie;
+                        div.className = 'suggestion';
+                        div.addEventListener('click', function () {
+                            input.value = movie;
+                            suggestions.innerHTML = '';
+                        });
+                        suggestions.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching autocomplete data:', error);
+                });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Recommendations Based on "{{ movie_title }}"</h1>
+    <ul class="list-group">
+        {% if recommendations.empty %}
+            <li class="list-group-item">No recommendations found. Please try another movie.</li>
+        {% else %}
+            {% for _, row in recommendations.iterrows() %}
+            <li class="list-group-item">
+                <a href="{{ row['link'] }}" target="_blank">{{ row['title'] }}</a>
+            </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+{% endblock %}

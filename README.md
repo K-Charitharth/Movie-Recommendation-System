@@ -76,7 +76,8 @@ This project is an **end-to-end interactive web application** that provides **pe
 
 ## 📂 Data Sources  
 - **MovieLens Dataset**: `movies.csv` and `ratings.csv`  
-- **Links Dataset**: `links.csv` (for IMDb/TMDb hyperlinks)  
+- **Links Dataset**: `links.csv` (for IMDb/TMDb hyperlinks)
+- **Download here**: https://files.grouplens.org/datasets/movielens/ml-latest-small.zip  
 
 ---
 
